@@ -1,0 +1,7 @@
+# 主程序 tianxi_cdp.py 的唯一依赖：websocket-client（CDP 直连客户端）
+websocket-client>=1.6
+
+# 可选：旧版纯网页模式（tianxi_auto.py）才需要 playwright，默认不装。
+# 需要时手动执行：
+#   pip install "playwright>=1.44" && playwright install chromium
+# （Playwright dropped Python 3.8 support after 1.40；Python 3.8 请用 playwright>=1.38,<1.41）

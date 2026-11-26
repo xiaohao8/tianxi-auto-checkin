@@ -1,0 +1,79 @@
+{
+  "mode": "browser",
+  "_说明": "复制本文件为 config.json 后填写。urls.signin 填『签到中心』页面的完整地址。",
+  "urls": {
+    "base": "",
+    "signin": "https://请替换为签到中心页面地址"
+  },
+  "browser": {
+    "channel": "chrome",
+    "profile_dir": ".profile",
+    "default_headless": false
+  },
+  "behavior": {
+    "auto_dialog": true,
+    "task_prompt": "请直接完成这个任务，输出完整结果。",
+    "max_tasks": 20,
+    "max_fail_rounds": 2,
+    "min_delay": 1.2,
+    "max_delay": 3.5,
+    "screenshot_on_error": true
+  },
+  "timeouts": {
+    "page": 40,
+    "element": 12,
+    "signin_verify": 12,
+    "task_verify": 120,
+    "task_settle": 15
+  },
+  "selectors": {
+    "sign_button": [
+      "header button:has-text('签到')",
+      "button:has-text('签到')",
+      "[class*=sign] button:has-text('签到')",
+      "text=签到"
+    ],
+    "already_signed": ["text=已签到", "text=今日已签", "text=明天再来"],
+    "task_button": [
+      "button:has-text('云完成')",
+      "div[class*=btn]:has-text('云完成')",
+      "text=云完成"
+    ],
+    "toast": ["[class*=message]", "[class*=toast]", "[class*=notification]", "[role=alert]"],
+    "dialog_input": ["textarea", "input[type=text][placeholder*='描述']"],
+    "dialog_send": [
+      "button:has-text('发送')",
+      "button:has-text('生成')",
+      "button:has-text('提交')",
+      "button:has-text('确定')"
+    ],
+    "popup_close": ["button[aria-label='Close']", ".ant-modal-close", "[class*=close-icon]"]
+  },
+  "client": {
+    "_说明": "CDP 模式配置。keywords：页面改版时先跑 python tianxi_cdp.py --inspect，再把实际文案填进来；条目前加 - 表示移除默认项。auto_fill_prompt/task_prompt/task_skip：任务流程变化时用，见 README「任务变了怎么办」。",
+    "keywords": {
+      "route": "#/SignIn",
+      "signin_button": ["签到"],
+      "task_action": ["去完成", "领能量"],
+      "signin_exclude": ["本周签到", "连续签到"]
+    },
+    "auto_fill_prompt": false,
+    "task_prompt": "请直接完成这个任务，输出完整结果。",
+    "task_skip": ["充值", "邀请"],
+    "screenshot": false
+  },
+  "api": {
+    "base": "https://请替换",
+    "headers": {
+      "Cookie": "粘贴 DevTools 里的完整 Cookie 请求头",
+      "Content-Type": "application/json",
+      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"
+    },
+    "success_field": "code",
+    "success_values": [0, 200, "0", "200", true],
+    "sign_in": { "method": "POST", "path": "/api/请替换为签到接口", "json": {} },
+    "tasks": [
+      { "name": "短篇故事创作", "method": "POST", "path": "/api/请替换为任务接口", "json": { "taskId": "请替换" } }
+    ]
+  }
+}
